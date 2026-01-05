@@ -37,23 +37,6 @@ function initMap() {
 
             map.geoObjects.add(studioPlacemark);
             map.geoObjects.add(metroPlacemark);
-
-            // Draw a simple walking path line from metro to studio
-            var walkingPath = new ymaps.Polyline([
-                metroKurskayaCoords,
-                [55.757500, 37.655500],
-                [55.756200, 37.652000],
-                studioCoords
-            ], {
-                hintContent: 'Пешком ~10 минут'
-            }, {
-                strokeColor: '#ff3333',
-                strokeWidth: 4,
-                strokeStyle: 'shortdash',
-                opacity: 0.8
-            });
-            
-            map.geoObjects.add(walkingPath);
         });
     }
 }
