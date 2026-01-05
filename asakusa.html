@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Почему Asakusa Lab называется Асакуса - история района Асакуса в Токио и керамики Имадо-яки">
+    <title>Почему Асакуса - Asakusa Lab</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .asakusa-hero {
+            padding-top: 40px;
+            padding-bottom: 20px;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+        
+        .back-link:hover {
+            color: var(--color-accent);
+        }
+        
+        .asakusa-hero .container {
+            max-width: 1000px;
+        }
+        
+        .asakusa-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+            margin-bottom: 3rem;
+        }
+        
+        .asakusa-intro-text h1 {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .asakusa-intro-text h1 .jp {
+            font-size: 1.8rem;
+            opacity: 0.7;
+            font-weight: 300;
+        }
+        
+        .asakusa-intro-text p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+        
+        .asakusa-map-block {
+            background: var(--color-bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(90, 154, 74, 0.2);
+        }
+        
+        .asakusa-map-block h3 {
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .asakusa-map {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .asakusa-map iframe {
+            display: block;
+            width: 100%;
+            height: 300px;
+            border: 0;
+        }
+        
+        .map-caption {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+        
+        .history-section {
+            padding: 60px 20px;
+            background: var(--color-bg-elevated);
+        }
+        
+        .history-section .container {
+            max-width: 900px;
+        }
+        
+        .history-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--color-primary), transparent);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 10px;
+            height: 10px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            transform: translateX(-4px);
+        }
+        
+        .timeline-item h3 {
+            color: var(--color-accent);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-item p {
+            line-height: 1.7;
+        }
+        
+        .ceramics-section {
+            padding: 60px 20px;
+        }
+        
+        .ceramics-section .container {
+            max-width: 1000px;
+        }
+        
+        .ceramics-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .ceramics-text h2 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .ceramics-text p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+        
+        .ceramics-highlight {
+            background: var(--color-bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            border-left: 4px solid var(--color-primary);
+        }
+        
+        .ceramics-highlight h3 {
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .ceramics-highlight ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .ceramics-highlight li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--color-text-secondary);
+        }
+        
+        .ceramics-highlight li::before {
+            content: '陶';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-size: 0.9rem;
+        }
+        
+        .why-section {
+            padding: 60px 20px;
+            background: var(--color-bg-elevated);
+        }
+        
+        .why-section .container {
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .why-section h2 {
+            margin-bottom: 2rem;
+        }
+        
+        .why-section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .why-section .highlight-text {
+            color: var(--color-primary);
+            font-weight: 500;
+        }
+        
+        .landmarks-section {
+            padding: 60px 20px;
+        }
+        
+        .landmarks-section .container {
+            max-width: 1000px;
+        }
+        
+        .landmarks-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .landmarks-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .landmark-card {
+            background: var(--color-bg-card);
+            border: 1px solid rgba(90, 154, 74, 0.15);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .landmark-card:hover {
+            border-color: var(--color-border);
+            transform: translateY(-5px);
+        }
+        
+        .landmark-card .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .landmark-card h3 {
+            color: var(--color-accent);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+        
+        .landmark-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 1023px) {
+            .asakusa-intro {
+                grid-template-columns: 1fr;
+            }
+            
+            .ceramics-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .landmarks-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .asakusa-intro-text h1 {
+                font-size: 2rem;
+            }
+            
+            .asakusa-intro-text h1 .jp {
+                font-size: 1.4rem;
+            }
+            
+            .landmarks-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline {
+                padding-left: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="screen asakusa-hero">
+        <div class="container">
+            <a href="index.html" class="back-link">← Назад на главную</a>
+            
+            <div class="asakusa-intro">
+                <div class="asakusa-intro-text">
+                    <h1>Асакуса <span class="jp">浅草</span></h1>
+                    <p>Асакуса — один из старейших и наиболее атмосферных кварталов Токио, расположенный в специальном районе Тайто на берегу реки Сумида.</p>
+                    <p>Это место, где сохранилась традиционная атмосфера старой Японии — с узкими улочками, храмами, фестивалями и ремесленными мастерскими. Район известен как часть исторической области «ситамати» — нижнего города, где жили и работали торговцы и ремесленники.</p>
+                </div>
+                
+                <div class="asakusa-map-block">
+                    <h3>Асакуса на карте Токио</h3>
+                    <div class="asakusa-map">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12958.08071478699!2d139.7895!3d35.7147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188ec1a4d7b5af%3A0x3c5e6e1f5f1e8e1a!2sAsakusa%2C%20Taito%20City%2C%20Tokyo%2C%20Japan!5e0!3m2!1sen!2sru!4v1704441600000!5m2!1sen!2sru" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <p class="map-caption">Северо-восток центрального Токио, район Тайто, у реки Сумида</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section class="history-section">
+        <div class="container">
+            <h2 class="section-title">История Асакусы</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>628 год</h3>
+                    <p>Согласно легенде, два брата-рыбака выловили из реки Сумида статую бодхисаттвы Каннон. На этом месте был основан храм Сэнсо-дзи — старейший буддийский храм Токио.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>Период Эдо (1603–1868)</h3>
+                    <p>Асакуса стала центром городской жизни и культуры. Здесь селились ремесленники и торговцы, работали мастерские по изготовлению вееров, нэцкэ, гребней и других традиционных изделий. Район был известен своими театрами и развлечениями.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>XIX век</h3>
+                    <p>В Асакусе сформировалась школа резчиков нэцкэ во главе с мастером Кокусаем. Район продолжал развиваться как центр ремесленного производства и развлечений.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>XX век</h3>
+                    <p>Большую часть века Асакуса оставалась токийским развлекательным центром с театрами и кинотеатрами (Дэнкикан). Район сильно пострадал от бомбардировок 1945 года, но был восстановлен, сохранив свою уникальную атмосферу.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ceramics Section -->
+    <section class="ceramics-section">
+        <div class="container">
+            <div class="ceramics-content">
+                <div class="ceramics-text">
+                    <h2 class="section-title">Керамика Имадо-яки</h2>
+                    <p>Совсем рядом с Асакусой, в районе Имадо, начиная с периода Эдо производилась традиционная керамика <strong>Имадо-яки</strong> (今戸焼).</p>
+                    <p>Местные гончары делали бытовую посуду, горшки, черепицу и знаменитые глиняные фигурки — в том числе первые <strong>манэки-нэко</strong> (招き猫), кошек-талисманов, приносящих удачу.</p>
+                    <p>Имадо-яки ценилась за тёплый терракотовый оттенок и простоту форм. Близость к реке Сумида давала доступ к качественной глине, а соседство с оживлённой Асакусой обеспечивало рынок сбыта.</p>
+                    <p>Так район стал одним из центров керамического ремесла в Эдо — и именно эта связь с керамикой вдохновила название нашей студии.</p>
+                </div>
+                
+                <div class="ceramics-highlight">
+                    <h3>Изделия Имадо-яки</h3>
+                    <ul>
+                        <li>Бытовая посуда и горшки</li>
+                        <li>Черепица для крыш</li>
+                        <li>Глиняные фигурки</li>
+                        <li>Манэки-нэко (кошки удачи)</li>
+                        <li>Кадильницы для благовоний</li>
+                        <li>Декоративная керамика</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Landmarks Section -->
+    <section class="landmarks-section">
+        <div class="container">
+            <h2 class="section-title">Достопримечательности</h2>
+            
+            <div class="landmarks-grid">
+                <div class="landmark-card">
+                    <div class="icon">⛩️</div>
+                    <h3>Храм Сэнсо-дзи</h3>
+                    <p>Старейший буддийский храм Токио, посвящённый бодхисаттве Каннон. История храма насчитывает около 1400 лет.</p>
+                </div>
+                
+                <div class="landmark-card">
+                    <div class="icon">🏮</div>
+                    <h3>Ворота Каминаримон</h3>
+                    <p>Знаменитые «Ворота грома» с гигантским красным фонарём — символ Асакусы и один из самых узнаваемых видов Токио.</p>
+                </div>
+                
+                <div class="landmark-card">
+                    <div class="icon">🛍️</div>
+                    <h3>Накамисэ-дори</h3>
+                    <p>Торговая улица длиной 250 метров, ведущая к храму. Здесь продают традиционные сувениры, сладости и ремесленные изделия.</p>
+                </div>
+                
+                <div class="landmark-card">
+                    <div class="icon">🌊</div>
+                    <h3>Река Сумида</h3>
+                    <p>Живописная река на восточной границе Асакусы. Отсюда открывается вид на современный Токио и небоскрёб Sky Tree.</p>
+                </div>
+                
+                <div class="landmark-card">
+                    <div class="icon">🎭</div>
+                    <h3>Фестиваль Сандзя-мацури</h3>
+                    <p>Один из крупнейших синтоистских фестивалей Токио, проводится в мае. Шествия с переносными святилищами (микоси).</p>
+                </div>
+                
+                <div class="landmark-card">
+                    <div class="icon">🍵</div>
+                    <h3>Традиционные чайные</h3>
+                    <p>В Асакусе сохранились старинные чайные дома и кафе, где можно попробовать матчу и традиционные японские сладости.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Section -->
+    <section class="why-section">
+        <div class="container">
+            <h2 class="section-title">Почему мы выбрали это название</h2>
+            <p>Асакуса олицетворяет для нас <span class="highlight-text">связь традиций и современности</span>, ремесленного мастерства и живого городского сообщества.</p>
+            <p>Как и мастера Имадо-яки, которые создавали керамику на берегу Сумиды, мы хотим объединять людей, увлечённых керамикой, делиться знаниями и развивать ремесло в современном контексте.</p>
+            <p><span class="highlight-text">Asakusa Lab</span> — это наша попытка создать такое же живое пространство, где традиционное мастерство встречается с современными технологиями, а сообщество единомышленников становится главной ценностью.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Asakusa Lab</h3>
+                <p>Керамическая лаборатория</p>
+                <p>Казарменный переулок, 8с2</p>
+                <p>10 минут от метро Курская</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <a href="mailto:mail@asakusa-lab.cc">mail@asakusa-lab.cc</a>
+                <a href="https://t.me/asakusa_lab" target="_blank">Телеграм</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="legal-info">ИП Зайцев | ИНН 00000 | ОГРН 0000</p>
+            <p>© 2026 Asakusa Lab. Сайт: Cursor + Claude</p>
+        </div>
+    </footer>
+</body>
+</html>
+
