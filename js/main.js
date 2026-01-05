@@ -3,17 +3,10 @@ function initMap() {
     if (typeof ymaps !== 'undefined') {
         ymaps.ready(function () {
             var studioCoords = [55.755905, 37.650927];
-            var metroKurskayaCoords = [55.758739, 37.659294];
-            
-            // Center between metro and studio for better view
-            var centerCoords = [
-                (studioCoords[0] + metroKurskayaCoords[0]) / 2,
-                (studioCoords[1] + metroKurskayaCoords[1]) / 2
-            ];
             
             var map = new ymaps.Map('yandex-map', {
-                center: centerCoords,
-                zoom: 15,
+                center: studioCoords,
+                zoom: 14,
                 controls: ['zoomControl', 'fullscreenControl']
             });
 
@@ -26,17 +19,7 @@ function initMap() {
                 preset: 'islands#redCircleDotIconWithCaption'
             });
 
-            // Metro marker
-            var metroPlacemark = new ymaps.Placemark(metroKurskayaCoords, {
-                balloonContent: '<strong>М Курская</strong><br>5-10 минут пешком до студии',
-                hintContent: 'М Курская',
-                iconCaption: 'М Курская'
-            }, {
-                preset: 'islands#blueCircleDotIconWithCaption'
-            });
-
             map.geoObjects.add(studioPlacemark);
-            map.geoObjects.add(metroPlacemark);
         });
     }
 }

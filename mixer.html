@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Мешалка для глазурей от Asakusa Lab - удобное перемешивание керамических глазурей шуруповёртом">
+    <title>Мешалка для глазурей - Asakusa Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .product-hero {
+            padding-top: 40px;
+            padding-bottom: 20px;
+        }
+        
+        .product-hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .product-main-image {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+        
+        .product-info h1 {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-info .price-block {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .product-info .price-main {
+            font-size: 2rem;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+        
+        .buy-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        
+        .buy-btn {
+            padding: 1rem 2rem;
+            border: 1px solid var(--color-primary);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s var(--transition-smooth);
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .buy-btn:hover {
+            background: var(--color-primary);
+            color: var(--color-text);
+        }
+        
+        .buy-btn.primary {
+            background: var(--color-primary);
+            color: var(--color-text);
+        }
+        
+        .buy-btn.primary:hover {
+            background: var(--color-accent);
+        }
+        
+        .product-gallery {
+            padding: 40px 20px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .product-description {
+            padding: 40px 20px;
+        }
+        
+        .product-description .content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--color-bg-card);
+            border: 1px solid rgba(90, 154, 74, 0.15);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            color: var(--color-accent);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+        
+        .specs-section {
+            padding: 40px 20px;
+            background: var(--color-bg-elevated);
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .spec-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .spec-value {
+            font-size: 2rem;
+            color: var(--color-primary);
+            font-weight: 600;
+            display: block;
+        }
+        
+        .spec-label {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+        
+        .back-link:hover {
+            color: var(--color-accent);
+        }
+        
+        @media (max-width: 1023px) {
+            .product-hero .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .specs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .product-info h1 {
+                font-size: 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .buy-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Product Hero -->
+    <section class="screen product-hero">
+        <div class="container">
+            <div class="product-image-container">
+                <a href="index.html" class="back-link">← Назад на главную</a>
+                <img src="pics/mixer/4.jpg" alt="Мешалка для глазурей" class="product-main-image">
+            </div>
+            <div class="product-info">
+                <h1>Мешалка для глазурей</h1>
+                <p>Насадка на шуруповёрт для перемешивания керамических глазурей. Удобная форма, подходит для стандартных банок, не царапает стенки.</p>
+                <p>Это просто удобные мешалки. Перемешивают любую застоявшуюся глазурь за считанные секунды.</p>
+                
+                <div class="price-block">
+                    <span class="price-main">490 ₽</span>
+                    <div class="buy-buttons">
+                        <a href="#" class="buy-btn">Wildberries</a>
+                        <a href="#" class="buy-btn">Озон</a>
+                        <a href="#" class="buy-btn primary">Наш магазин</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section class="product-gallery">
+        <div class="container">
+            <h2 class="section-title">Фотографии</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="pics/mixer/1.jpg" alt="Три размера мешалок">
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/mixer/2.jpg" alt="Мешалка - вид сбоку">
+                </div>
+                <div class="gallery-item">
+                    <img src="pics/mixer/3.jpg" alt="Мешалка - вид сверху">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specs -->
+    <section class="specs-section">
+        <div class="container">
+            <div class="specs-grid">
+                <div class="spec-item">
+                    <span class="spec-value">3 размера</span>
+                    <span class="spec-label">S / M / L</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-value">HEX 6.35</span>
+                    <span class="spec-label">Стандартный хвостовик</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-value">PLA</span>
+                    <span class="spec-label">Материал</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Description -->
+    <section class="screen product-description">
+        <div class="container">
+            <div class="content">
+                <h2>Зачем нужна мешалка</h2>
+                <p>Глазурь оседает на дно банки, особенно если там есть тяжёлые компоненты. Перед использованием её нужно перемешать — иначе нанесёте на изделие неравномерный состав. Палочкой это делать долго и муторно, особенно если банок много.</p>
+                <p>Мешалка на шуруповёрте справляется за несколько секунд. Воткнул, включил, готово. Форма лопасти подобрана так, чтобы не царапать стенки банки и не разбрызгивать содержимое.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Стандартный хвостовик</h3>
+                        <p>HEX 6.35mm — подходит для любого шуруповёрта с быстрозажимным патроном. Просто вставляете и работаете.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Три размера</h3>
+                        <p>S для маленьких баночек, M для стандартных, L для больших вёдер. Выбирайте под свою тару.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Не царапает</h3>
+                        <p>Пластиковые лопасти не повреждают стенки банок. Можно использовать даже с пластиковой тарой.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Наша разработка</h3>
+                        <p>Мы сами спроектировали эту мешалку. 3D-печать, сделано в России.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Asakusa Lab</h3>
+                <p>Керамическая лаборатория</p>
+                <p>Казарменный переулок, 8с2</p>
+                <p>10 минут от метро Курская</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <a href="mailto:mail@asakusa-lab.cc">mail@asakusa-lab.cc</a>
+                <a href="https://t.me/asakusa_lab" target="_blank">Телеграм</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="legal-info">ИП Зайцев | ИНН 00000 | ОГРН 0000</p>
+            <p>© 2026 Asakusa Lab. Сайт: Cursor + Claude</p>
+        </div>
+    </footer>
+</body>
+</html>
+
