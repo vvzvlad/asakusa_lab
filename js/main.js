@@ -2,22 +2,58 @@
 function initMap() {
     if (typeof ymaps !== 'undefined') {
         ymaps.ready(function () {
-            var markerCoords = [55.755905, 37.650927];
+            var studioCoords = [55.755905, 37.650927];
+            var metroKurskayaCoords = [55.758739, 37.659294];
+            
+            // Center between metro and studio for better view
+            var centerCoords = [
+                (studioCoords[0] + metroKurskayaCoords[0]) / 2,
+                (studioCoords[1] + metroKurskayaCoords[1]) / 2
+            ];
             
             var map = new ymaps.Map('yandex-map', {
-                center: markerCoords,
-                zoom: 17,
+                center: centerCoords,
+                zoom: 15,
                 controls: ['zoomControl', 'fullscreenControl']
             });
 
-            var placemark = new ymaps.Placemark(markerCoords, {
-                balloonContent: '<strong>Asakusa Lab</strong><br>Казарменный переулок, 8с2<br>вход с зеленым фонарем'
+            // Studio marker - big red icon
+            var studioPlacemark = new ymaps.Placemark(studioCoords, {
+                balloonContent: '<strong>Asakusa Lab</strong><br>Казарменный переулок, 8с2<br>вход с зелёным фонарём',
+                hintContent: 'Asakusa Lab',
+                iconCaption: 'Asakusa Lab'
             }, {
-                preset: 'islands#greenDotIcon'
+                preset: 'islands#redCircleDotIconWithCaption'
             });
 
-            map.geoObjects.add(placemark);
-            map.setCenter(markerCoords, 17);
+            // Metro marker
+            var metroPlacemark = new ymaps.Placemark(metroKurskayaCoords, {
+                balloonContent: '<strong>М Курская</strong><br>5-10 минут пешком до студии',
+                hintContent: 'М Курская',
+                iconCaption: 'М Курская'
+            }, {
+                preset: 'islands#blueCircleDotIconWithCaption'
+            });
+
+            map.geoObjects.add(studioPlacemark);
+            map.geoObjects.add(metroPlacemark);
+
+            // Draw a simple walking path line from metro to studio
+            var walkingPath = new ymaps.Polyline([
+                metroKurskayaCoords,
+                [55.757500, 37.655500],
+                [55.756200, 37.652000],
+                studioCoords
+            ], {
+                hintContent: 'Пешком ~10 минут'
+            }, {
+                strokeColor: '#ff3333',
+                strokeWidth: 4,
+                strokeStyle: 'shortdash',
+                opacity: 0.8
+            });
+            
+            map.geoObjects.add(walkingPath);
         });
     }
 }
