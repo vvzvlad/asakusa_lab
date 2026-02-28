@@ -490,6 +490,31 @@ a:hover {
     color: var(--color-text);
 }
 
+/* Marketplace Buttons */
+.btn-wb {
+    background-color: #cb11ab;
+    border-color: #cb11ab;
+    color: #ffffff;
+}
+
+.btn-wb:hover {
+    background-color: #a60f8f;
+    border-color: #a60f8f;
+    color: #ffffff;
+}
+
+.btn-ozon {
+    background-color: #005bff;
+    border-color: #005bff;
+    color: #ffffff;
+}
+
+.btn-ozon:hover {
+    background-color: #0048cc;
+    border-color: #0048cc;
+    color: #ffffff;
+}
+
 /* Footer */
 footer {
     background-color: #0a0a0a;
@@ -669,4 +694,3 @@ footer {
         font-size: 0.95rem;
     }
 }
-
