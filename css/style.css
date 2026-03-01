@@ -525,6 +525,28 @@ a:hover {
     border: none;
 }
 
+.buy-buttons .buy-btn.btn-wb {
+    background-color: #cb11ab !important;
+    color: #ffffff !important;
+}
+
+.buy-buttons .buy-btn.btn-ozon {
+    background-color: #005bff !important;
+    color: #ffffff !important;
+}
+
+.buy-buttons .buy-btn.btn-wb:hover {
+    background-color: #cb11ab !important;
+    filter: brightness(0.85);
+    color: #ffffff !important;
+}
+
+.buy-buttons .buy-btn.btn-ozon:hover {
+    background-color: #005bff !important;
+    filter: brightness(0.85);
+    color: #ffffff !important;
+}
+
 .buy-buttons .buy-btn.primary:hover,
 .buy-buttons .buy-btn.btn-wb:hover,
 .buy-buttons .buy-btn.btn-ozon:hover {
