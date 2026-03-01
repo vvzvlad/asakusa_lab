@@ -491,76 +491,30 @@ a:hover {
 }
 
 /* Marketplace Buttons */
-.btn-wb {
-    background-color: #cb11ab;
-    border: none;
-    color: #ffffff;
-}
-
-.btn-wb:hover {
-    background-color: #cb11ab;
-    filter: brightness(0.85);
-    color: #ffffff;
-}
-
-.btn-ozon {
-    background-color: #005bff;
-    border: none;
-    color: #ffffff;
-}
-
-.btn-ozon:hover {
-    background-color: #005bff;
-    filter: brightness(0.85);
-    color: #ffffff;
-}
-
+.btn-wb,
+.btn-ozon,
 .btn-shop {
+    border: none !important;
+    color: #ffffff !important;
     white-space: nowrap;
 }
 
-.buy-buttons .buy-btn.primary,
-.buy-buttons .buy-btn.btn-wb,
-.buy-buttons .buy-btn.btn-ozon {
-    border: none;
+.btn-wb:hover,
+.btn-ozon:hover,
+.btn-shop:hover {
+    filter: brightness(0.85);
 }
 
-.buy-buttons .buy-btn.btn-wb {
+.btn-wb {
     background-color: #cb11ab !important;
-    color: #ffffff !important;
 }
 
-.buy-buttons .buy-btn.btn-ozon {
+.btn-ozon {
     background-color: #005bff !important;
-    color: #ffffff !important;
 }
 
-.buy-buttons .buy-btn.btn-wb:hover {
-    background-color: #cb11ab !important;
-    filter: brightness(0.85);
-    color: #ffffff !important;
-}
-
-.buy-buttons .buy-btn.btn-ozon:hover {
-    background-color: #005bff !important;
-    filter: brightness(0.85);
-    color: #ffffff !important;
-}
-
-.buy-buttons .buy-btn.primary:hover,
-.buy-buttons .buy-btn.btn-wb:hover,
-.buy-buttons .buy-btn.btn-ozon:hover {
-    filter: brightness(0.85);
-}
-
-.product-link.btn-shop {
-    border: none;
-    background-color: var(--color-primary);
-    color: var(--color-text);
-}
-
-.product-link.btn-shop:hover {
-    filter: brightness(0.85);
+.btn-shop {
+    background-color: var(--color-primary) !important;
 }
 
 /* Footer */
