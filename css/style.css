@@ -494,8 +494,8 @@ a:hover {
 .btn-wb,
 .btn-ozon,
 .btn-shop {
-    border: none !important;
-    color: #ffffff !important;
+    border: none;
+    color: #ffffff;
     white-space: nowrap;
 }
 
@@ -506,15 +506,31 @@ a:hover {
 }
 
 .btn-wb {
-    background-color: #cb11ab !important;
+    background-color: #cb11ab;
 }
 
 .btn-ozon {
-    background-color: #005bff !important;
+    background-color: #005bff;
 }
 
 .btn-shop {
-    background-color: var(--color-primary) !important;
+    background-color: var(--color-primary);
+}
+
+/* Fix: .product-link:hover overrides marketplace button colors */
+.product-link.btn-wb:hover {
+    background-color: #cb11ab;
+    color: #ffffff;
+}
+
+.product-link.btn-ozon:hover {
+    background-color: #005bff;
+    color: #ffffff;
+}
+
+.product-link.btn-shop:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text);
 }
 
 /* Footer */
