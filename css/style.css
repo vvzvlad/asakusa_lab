@@ -513,15 +513,39 @@ a:hover {
     background-color: #005bff;
 }
 
-.btn-shop {
-    background-color: var(--color-primary);
-}
+ .btn-shop {
+     background-color: var(--color-primary);
+ }
+ 
+ .buy-btn.btn-wb {
+     background-color: #cb11ab;
+     border-color: #cb11ab;
+     color: #ffffff;
+ }
+ 
+ .buy-btn.btn-ozon {
+     background-color: #005bff;
+     border-color: #005bff;
+     color: #ffffff;
+ }
+ 
+ .buy-btn.btn-shop {
+     background-color: var(--color-primary);
+     border-color: var(--color-primary);
+     color: #ffffff;
+ }
+ 
+ .buy-btn:hover {
+     filter: none;
+     color: #ffffff;
+ }
+ 
+ /* Fix: .product-link:hover overrides marketplace button colors */
+ .product-link.btn-wb:hover {
+     background-color: #cb11ab;
+     color: #ffffff;
+ }
 
-/* Fix: .product-link:hover overrides marketplace button colors */
-.product-link.btn-wb:hover {
-    background-color: #cb11ab;
-    color: #ffffff;
-}
 
 .product-link.btn-ozon:hover {
     background-color: #005bff;
