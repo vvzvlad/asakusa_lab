@@ -540,7 +540,7 @@ a:hover {
  }
  
  .buy-btn:hover {
-     filter: none;
+     filter: brightness(0.85);
      color: #ffffff;
  }
  
