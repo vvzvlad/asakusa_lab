@@ -561,6 +561,39 @@ a:hover {
     color: var(--color-text);
 }
 
+/* Product Specs Section */
+.specs-section {
+    padding: 40px 20px;
+    background: var(--color-bg-elevated);
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.spec-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--color-bg-card);
+    border: 1px solid rgba(90, 154, 74, 0.15);
+    border-radius: 8px;
+}
+
+.spec-value {
+    font-size: 2rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    display: block;
+}
+
+.spec-label {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
 /* Footer */
 footer {
     background-color: #0a0a0a;
