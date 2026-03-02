@@ -150,10 +150,9 @@
         
         .specs-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1.5rem;
-            max-width: 900px;
-            margin: 0 auto;
+            justify-content: center;
         }
         
         .spec-item {
@@ -201,9 +200,6 @@
                 grid-template-columns: 1fr;
             }
             
-            .specs-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
         
         @media (max-width: 768px) {
@@ -213,10 +209,6 @@
             
             .gallery-grid {
                 grid-template-columns: 1fr 1fr;
-            }
-            
-            .specs-grid {
-                grid-template-columns: 1fr;
             }
             
             .buy-buttons {
@@ -274,9 +266,6 @@
                 </div>
                 <div class="gallery-item">
                     <img src="pics/funnel/4.jpg" alt="Фильтр крупным планом">
-                </div>
-                <div class="gallery-item">
-                    <img src="pics/funnel/5.jpg" alt="Сменная сетка">
                 </div>
                 <div class="gallery-item">
                     <img src="pics/funnel/6.jpg" alt="Воронка в руке - размер">
