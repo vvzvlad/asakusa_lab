@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document, 'script','https://mc.yandex.ru/metrika/tag.js?id=106790512','ym');
+
+        ym(106790512, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/106790512" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Калькулятор для создания линейных, треугольных и квадратных растяжек глазурей.">
+    <title>Калькулятор растяжек глазури - Asakusa Lab</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .glaze-layout {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .glaze-sidebar {
+            width: 220px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-title {
+            color: var(--color-primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .stretch-type-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stretch-type {
+            width: 100%;
+            border: 1px solid var(--color-primary);
+            background: transparent;
+            color: var(--color-primary);
+            border-radius: 999px;
+            padding: 0.5rem 0.75rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .stretch-type:hover {
+            background: rgba(90, 154, 74, 0.15);
+        }
+
+        .stretch-type.active {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
+        }
+
+        .filter-item label {
+            display: block;
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-item input[type="number"] {
+            width: 100%;
+            padding: 0.5rem;
+            background: var(--color-bg-elevated);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            border-radius: 4px;
+            margin-top: 0.35rem;
+            margin-bottom: 1rem;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .filter-item input[type="number"]:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(90, 154, 74, 0.2);
+        }
+
+        .glaze-output {
+            flex: 1;
+            min-width: 0;
+            overflow-x: auto;
+        }
+
+        .calc {
+            font-family: Helvetica, Courier New, Consolas, SF Mono, DejaVu Sans Mono, Roboto Mono, monospace;
+        }
+
+        .calc-1,
+        .calc-2,
+        .calc-3 {
+            margin: 0 0 20px;
+        }
+
+        .calc-1 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .calc-2 {
+            display: grid;
+            gap: 10px;
+            grid-auto-rows: min-content;
+            width: max-content;
+            margin: 0 auto 20px;
+        }
+
+        .calc-3 {
+            display: inline-block;
+            text-align: center;
+            margin-left: -5px;
+        }
+
+        .calc-1-svg {
+            width: 100px;
+        }
+
+        .calc-2-svg {
+            width: 74px;
+        }
+
+        .calc-3-svg {
+            width: 88.06px;
+            margin: 5px;
+            vertical-align: top;
+        }
+
+        .calc-st {
+            stroke: #231f20;
+        }
+
+        .calc-st__1 {
+            stroke-width: 1;
+        }
+
+        .calc-st__2 {
+            stroke-width: 2;
+        }
+
+        .calc-st__0 {
+            stroke-width: .5;
+        }
+
+        .calc-triangle {
+            stroke-linejoin: bevel;
+        }
+
+        .calc-bg1 {
+            fill: #fff200;
+            fill: #645faa;
+            opacity: .83;
+        }
+
+        .calc-bg2 {
+            fill: #ed1c24;
+            fill: #00a651;
+            opacity: .17;
+        }
+
+        .calc-bg3 {
+            fill: #fff200;
+            opacity: .83;
+        }
+
+        .calc-bg4 {
+            fill: #ed1c24;
+            opacity: .17;
+        }
+
+        .calc-txt1-1-1 {
+            font-size: 11px;
+            text-anchor: start;
+        }
+
+        .calc-txt1-1-2 {
+            font-size: 11px;
+            text-anchor: end;
+        }
+
+        .calc-txt1-2-1 {
+            text-anchor: middle;
+            alignment-baseline: middle;
+            font-size: 20px;
+        }
+
+        .calc-txt1-n {
+            text-anchor: middle;
+            alignment-baseline: middle;
+            font-size: 11px;
+        }
+
+        .calc-txt2-1-1,
+        .calc-txt2-2-1,
+        .calc-txt2-3-1,
+        .calc-txt2-4-1 {
+            font-size: 7.7px;
+        }
+
+        .calc-txt2-1-1,
+        .calc-txt2-4-1 {
+            text-anchor: start;
+        }
+
+        .calc-txt2-2-1,
+        .calc-txt2-3-1 {
+            text-anchor: end;
+        }
+
+        .calc-txt2-1-2,
+        .calc-txt2-2-2,
+        .calc-txt2-3-2,
+        .calc-txt2-4-2 {
+            font-size: 14px;
+            text-anchor: middle;
+            alignment-baseline: middle;
+        }
+
+        .calc-txt2-n {
+            font-size: 9px;
+            text-anchor: middle;
+            alignment-baseline: middle;
+        }
+
+        .calc-txt3-1-1,
+        .calc-txt3-2-1,
+        .calc-txt3-3-1 {
+            font-size: 7px;
+        }
+
+        .calc-txt3-1-1,
+        .calc-txt3-1-2 {
+            text-anchor: middle;
+        }
+
+        .calc-txt3-2-2 {
+            text-anchor: middle;
+            transform: translate(66px, 56px) rotate(-60deg) translate(-66px, -56px);
+        }
+
+        .calc-txt3-2-1 {
+            text-anchor: middle;
+            transform: translate(79px, 58px) rotate(-60deg) translate(-79px, -58px);
+        }
+
+        .calc-txt3-3-2 {
+            text-anchor: middle;
+            transform: translate(19px, 60px) rotate(60deg) translate(-19px, -60px);
+        }
+
+        .calc-txt3-3-1 {
+            text-anchor: middle;
+            transform: translate(13px, 60px) rotate(60deg) translate(-13px, -60px);
+        }
+
+        .calc-txt3-1-2,
+        .calc-txt3-2-2,
+        .calc-txt3-3-2 {
+            font-size: 12px;
+        }
+
+        .calc-txt3-n {
+            font-size: 10px;
+            text-anchor: middle;
+            alignment-baseline: middle;
+        }
+
+        .card {
+            background: transparent;
+        }
+
+        .card-body {
+            padding: 0;
+        }
+
+        .card-title {
+            color: var(--color-text);
+            font-weight: 300;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .fw-medium {
+            font-weight: 500;
+        }
+
+        .text-secondary {
+            color: #888;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        .pt-2 {
+            padding-top: 0.5rem;
+        }
+
+        .border-top {
+            border-top: 1px solid rgba(90,154,74,0.3);
+        }
+
+        .summary_container {
+            background: var(--color-bg-card);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-top: 1rem;
+            border: 1px solid rgba(90,154,74,0.15);
+            color: var(--color-text-secondary);
+        }
+
+        @media (max-width: 960px) {
+            .glaze-layout {
+                flex-direction: column;
+            }
+
+            .glaze-sidebar {
+                width: 100%;
+                max-width: 420px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="screen product-hero" style="align-items: flex-start; padding-top: 40px;">
+        <div class="container">
+            <a href="index.html" class="back-link">← Назад на главную</a>
+            <h1 style="color: var(--color-primary); font-size: 2rem; margin-bottom: 0.5rem;">Калькулятор растяжек глазури</h1>
+            <p style="color: var(--color-text-secondary); margin-bottom: 2rem;">Расчёт объёмов для линейных, треугольных и квадратных растяжек глазурей</p>
+
+            <div class="glaze-layout">
+                <div class="glaze-sidebar">
+                    <div>
+                        <p class="sidebar-title">Тип растяжки</p>
+                        <div class="stretch-type-group">
+                            <button class="stretch-type active" data-type="linear">Линейная</button>
+                            <button class="stretch-type" data-type="triangle">Треугольник</button>
+                            <button class="stretch-type" data-type="square">Квадрат</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-item">
+                        <p class="sidebar-title">Параметры</p>
+                        <label>Размер растяжки
+                            <input type="number" id="lineSize" max="11" min="3" value="3">
+                        </label>
+                        <label>Объём на тестер (мл)
+                            <input type="number" id="testerVolume" max="100" min="1" value="5">
+                        </label>
+                        <label>Плотность глазури
+                            <input type="number" id="density" max="2" min="1" step="0.05" value="1.5">
+                        </label>
+                        <label>Плотность сухой смеси
+                            <input type="number" id="dryDensity" max="5" min="1.1" step="0.1" value="2.5">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="glaze-output">
+                    <div class="calc_glaze"></div>
+                    <div class="summary_container"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Asakusa Lab</h3>
+                <p>Керамическая лаборатория</p>
+                <p>Казарменный переулок, 8с2</p>
+                <p>10 минут от метро Курская</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <a href="mailto:mail@asakusa-lab.cc">mail@asakusa-lab.cc</a>
+                <a href="https://t.me/asakusa_lab" target="_blank">Телеграм</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="legal-info">ИП Зайцев | ИНН 251111857826 | ОГРНИП 326237500022753</p>
+            <p>© 2026 Asakusa Lab. Сайт: Claude</p>
+        </div>
+    </footer>
+
+    <script src="js/tables.js"></script>
+    <script src="js/glaze_calculator.js"></script>
+    <script>
+        let current_stretch_type = "linear"; // Default type
+
+        function render_linear_table() {
+            const container = document.querySelector('.calc_glaze')
+            const initial_size = parseInt(document.getElementById('lineSize').value);
+            const initial_volume = parseInt(document.getElementById('testerVolume').value);
+            let data = generate_line_data(initial_size, initial_volume, 0.5);
+            
+            if (check_zero_volumes(data)) data = generate_line_data(initial_size, initial_volume, 0.1);
+            if (check_zero_volumes(data)) data = generate_line_data(initial_size, initial_volume, 0.05);
+            if (check_zero_volumes(data)) data = generate_line_data(initial_size, initial_volume, 0.01);
+
+            
+            container.innerHTML = '';
+            generate_line_table(initial_size, data, container);
+
+            const summary_container = document.querySelector('.summary_container');
+            const density = parseFloat(document.getElementById('density').value);
+            const dry_density = parseFloat(document.getElementById('dryDensity').value);
+            summary_container.innerHTML = generate_linear_summary(data, initial_size, density, dry_density);
+            return data;
+        }
+
+        function render_triangle_table() {
+            const container = document.querySelector('.calc_glaze')
+            const initial_size = parseInt(document.getElementById('lineSize').value);
+            const initial_volume = parseInt(document.getElementById('testerVolume').value);
+            let data = generate_triangle_data(initial_size, initial_volume, 0.5);
+            
+            if (check_zero_volumes(data)) data = generate_triangle_data(initial_size, initial_volume, 0.1);
+            if (check_zero_volumes(data)) data = generate_triangle_data(initial_size, initial_volume, 0.05);
+            if (check_zero_volumes(data)) data = generate_triangle_data(initial_size, initial_volume, 0.01);
+            container.innerHTML = '';
+            generate_triangle_table(initial_size, data, container);
+
+            const summary_container = document.querySelector('.summary_container');
+            const density = parseFloat(document.getElementById('density').value);
+            const dry_density = parseFloat(document.getElementById('dryDensity').value);
+            summary_container.innerHTML = generate_triangle_summary(data, initial_size, density, dry_density);
+            return data;
+        }
+
+        function render_square_table() {
+            const container = document.querySelector('.calc_glaze')
+            const initial_size = parseInt(document.getElementById('lineSize').value);
+            const initial_volume = parseInt(document.getElementById('testerVolume').value);
+            let data = generate_square_data(initial_size, initial_volume, 0.5);
+            
+            if (check_zero_volumes(data)) data = generate_square_data(initial_size, initial_volume, 0.1);
+            if (check_zero_volumes(data)) data = generate_square_data(initial_size, initial_volume, 0.05);
+            if (check_zero_volumes(data)) data = generate_square_data(initial_size, initial_volume, 0.01);
+            
+            container.innerHTML = '';
+            generate_rect_table(initial_size, initial_size, data, container);
+
+            const summary_container = document.querySelector('.summary_container');
+            const density = parseFloat(document.getElementById('density').value);
+            const dry_density = parseFloat(document.getElementById('dryDensity').value);
+            summary_container.innerHTML = generate_square_summary(data, initial_size, density, dry_density);
+            return data;
+        }
+        
+        function set_stretch_type(type) {
+            current_stretch_type = type;
+            console.log(`Selected stretch type: ${type}`);
+            
+            // Remove active class from all nav links
+            document.querySelectorAll('.stretch-type').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to the selected link
+            document.querySelector(`.stretch-type[data-type="${type}"]`).classList.add('active');
+            
+            // Set max value for lineSize based on stretch type
+            const line_size_input = document.getElementById('lineSize');
+            let max_value = 1; 
+            
+            if (type === "linear") max_value = 11;
+            if (type === "triangle") max_value = 9;
+            if (type === "square") max_value = 8;
+            
+            
+            line_size_input.max = max_value;
+            
+            // Ensure current value doesn't exceed the new max
+            if (parseInt(line_size_input.value) > max_value) {
+                line_size_input.value = max_value;
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('stretch_type', type);
+
+            generate_calc();
+        }
+        
+        function save_filter_values() {
+            const line_size = document.getElementById('lineSize').value;
+            const tester_volume = document.getElementById('testerVolume').value;
+            const density = document.getElementById('density').value;
+            const dry_density = document.getElementById('dryDensity').value;
+            
+            localStorage.setItem('line_size', line_size);
+            localStorage.setItem('tester_volume', tester_volume);
+            localStorage.setItem('density', density);
+            localStorage.setItem('dry_density', dry_density);
+        }
+        
+        function restore_filter_values() {
+            const line_size = localStorage.getItem('line_size');
+            const tester_volume = localStorage.getItem('tester_volume');
+            const density = localStorage.getItem('density');
+            const dry_density = localStorage.getItem('dry_density');
+            
+            if (line_size) document.getElementById('lineSize').value = line_size;
+            if (tester_volume) document.getElementById('testerVolume').value = tester_volume;
+            if (density) document.getElementById('density').value = density;
+            if (dry_density) document.getElementById('dryDensity').value = dry_density;
+        }
+
+        function generate_calc() {
+            if (current_stretch_type === "linear") {
+                const data = render_linear_table();
+                console.log("linear table generated: ", data);
+            } else if (current_stretch_type === "triangle") {
+                const data = render_triangle_table();
+                console.log("triangle table generated: ", data);
+            } else if (current_stretch_type === "square") {
+                const data = render_square_table();
+                console.log("square table generated: ", data);
+            }
+            // Save filter values to localStorage
+            save_filter_values();
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Restore filter values from localStorage
+            restore_filter_values();
+
+            generate_calc();
+            
+
+            
+            // Add event listeners to inputs
+            const filter_inputs = document.querySelectorAll('.filter-item input');
+            filter_inputs.forEach(input => {
+                input.addEventListener('change', generate_calc);
+                input.addEventListener('input', generate_calc);
+            });
+            
+            // Add event listeners to stretch type links
+            document.querySelectorAll('.stretch-type').forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    set_stretch_type(this.getAttribute('data-type'));
+                });
+            });
+            
+            // Restore saved stretch type
+            const saved_type = localStorage.getItem('stretch_type');
+            if (saved_type) {
+                set_stretch_type(saved_type);
+            } else {
+                set_stretch_type('linear'); // Default
+            }
+        });
+    </script>
+</body>
+</html>
