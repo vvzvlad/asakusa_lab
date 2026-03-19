@@ -108,6 +108,11 @@
             overflow-x: auto;
         }
 
+        /* Center the inline-block triangle and square containers */
+        .calc_glaze {
+            text-align: center;
+        }
+
         .calc {
             font-family: Helvetica, Courier New, Consolas, SF Mono, DejaVu Sans Mono, Roboto Mono, monospace;
         }
@@ -154,7 +159,22 @@
         }
 
         .calc-st {
-            stroke: #231f20;
+            stroke: #555555;
+        }
+
+        /* Darken bright tile background colors for dark theme */
+        .calc-bg1, .calc-bg2, .calc-bg3, .calc-bg4 {
+            filter: brightness(0.6);
+        }
+
+        /* Light text on colored SVG tile backgrounds */
+        .calc_glaze svg text {
+            fill: #bbbbbb;
+        }
+
+        /* Dark center circles instead of SVG default white */
+        .calc_glaze svg circle {
+            fill: #1e1e1e;
         }
 
         .calc-st__1 {
@@ -353,11 +373,10 @@
     </style>
 </head>
 <body>
-    <section class="screen product-hero" style="align-items: flex-start; padding-top: 40px;">
+    <section class="screen" style="align-items: flex-start; padding-top: 40px; padding-bottom: 40px;">
         <div class="container">
             <a href="index.html" class="back-link">← Назад на главную</a>
-            <h1 style="color: var(--color-primary); font-size: 2rem; margin-bottom: 0.5rem;">Калькулятор растяжек глазури</h1>
-            <p style="color: var(--color-text-secondary); margin-bottom: 2rem;">Расчёт объёмов для линейных, треугольных и квадратных растяжек глазурей</p>
+            <h1 style="color: var(--color-primary); font-size: 2rem; margin-bottom: 1.5rem;">Калькулятор растяжек глазури</h1>
 
             <div class="glaze-layout">
                 <div class="glaze-sidebar">

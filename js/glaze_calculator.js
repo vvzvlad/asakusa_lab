@@ -51,7 +51,7 @@ function check_zero_volumes(data) {
 function generate_square_data(size, tester_volume, rounding_precision = 0.5) {
   const data = {};
   // Цвета для четырех компонентов
-  const a_color = '#FFF200';
+  const a_color = '#00b5b8';
   const b_color = '#ED1C24';
   const c_color = '#645FAA';
   const d_color = '#00A651';
@@ -211,7 +211,7 @@ function generate_square_summary(data, size, density, dry_density, rounding_prec
 function generate_triangle_data(size, tester_volume, rounding_precision = 0.5) {
   const data = {};
   // Цвета для трех компонентов
-  const a_color = '#FFF200';
+  const a_color = '#00b5b8';
   const b_color = '#ED1C24';
   const c_color = '#645FAA';
   
@@ -389,7 +389,7 @@ function generate_triangle_summary(data, size, density, dry_density, rounding_pr
 function generate_line_data(size, tester_volume, rounding_precision = 0.5) {
   const data = {};
   // Начальный и конечный цвета линии
-  const start_color = '#FFF200';
+  const start_color = '#00b5b8';
   const end_color = '#ED1C24';
   
   // Создаем таблицу пропорций в зависимости от размера
