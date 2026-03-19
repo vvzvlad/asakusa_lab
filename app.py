@@ -1,9 +1,16 @@
 import os
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 from loguru import logger
 
 app = Flask(__name__)
+
+
+@app.before_request
+def redirect_glazymixer():
+    # Redirect legacy domain glazymixer.vvzvlad.xyz to the main site's glaze_blend page
+    if request.host == "glazymixer.vvzvlad.xyz":
+        return redirect("https://asakusa-lab.cc/glaze_blend?from=glazymixer", code=301)
 
 
 @app.route("/")
@@ -33,7 +40,8 @@ def funnel():
 
 @app.route("/glaze_blend")
 def glaze_blend():
-    return render_template("glaze_blend.html")
+    show_old_domain_notice = request.args.get("from") == "glazymixer"
+    return render_template("glaze_blend.html", show_old_domain_notice=show_old_domain_notice)
 
 
 @app.route("/mixer")

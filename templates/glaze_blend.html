@@ -373,6 +373,59 @@
     </style>
 </head>
 <body>
+    {% if show_old_domain_notice %}
+    <style>
+        #old-domain-notice {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+            background: #f59e0b;
+            color: #111111;
+            padding: 14px 56px 14px 16px;
+            font-size: 1rem;
+            line-height: 1.4;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+        }
+
+        #old-domain-notice-content {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        #close-notice {
+            position: absolute;
+            top: 8px;
+            right: 14px;
+            border: none;
+            background: transparent;
+            color: #111111;
+            font-size: 1.75rem;
+            line-height: 1;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        #old-domain-notice a {
+            color: #111111;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+    </style>
+    <div id="old-domain-notice" role="status" aria-live="polite">
+        <div id="old-domain-notice-content">
+            Вы перешли по старому адресу glazymixer.vvzvlad.xyz. Пожалуйста, обновите закладки: новый адрес —
+            <a href="https://asakusa-lab.cc/glaze_blend">asakusa-lab.cc/glaze_blend</a>
+        </div>
+        <button id="close-notice" type="button" aria-label="Закрыть уведомление">×</button>
+    </div>
+    <script>
+        document.getElementById('close-notice').onclick = function() {
+            document.getElementById('old-domain-notice').style.display = 'none';
+        };
+    </script>
+    {% endif %}
     <section class="screen" style="align-items: flex-start; padding-top: 40px; padding-bottom: 40px;">
         <div class="container">
             <a href="/" class="back-link">← Назад на главную</a>
