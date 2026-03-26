@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base/base.html' %}
 
 {% block title %}Asakusa Lab - Керамическая студия{% endblock %}
 
@@ -12,7 +12,7 @@
     <section id="hero" class="screen">
         <div class="container">
             <div class="hero-content">
-                <img src="/static/pics/logo.png" alt="Asakusa Lab" class="logo">
+                <img src="/pages/index/pics/logo.png" alt="Asakusa Lab" class="logo">
                 <p class="tagline">
                     Мы — это такие увлеченные чуваки (на самом деле мы айтишники, а керамика это так, для души), которые очень любят керамику и глазури. Мы решили что нам нужна своя студия, где можно сделать всё-всё, чтобы заниматься этим хобби было бы классно и удобно.
                 </p>
@@ -224,7 +224,7 @@
                 <div class="product-card">
                     <a href="/funnel" class="product-card-link">
                         <div class="product-image">
-                            <img src="/pages/funnel/static/pics/7.jpg" alt="Фильтр-воронка для глазурей">
+                            <img src="/pages/funnel/pics/7.jpg" alt="Фильтр-воронка для глазурей">
                         </div>
                         <h3>Воронки</h3>
                         <p>Воронки для фильтрации глазурей</p>
@@ -240,7 +240,7 @@
                 <div class="product-card">
                     <a href="/mixer" class="product-card-link">
                         <div class="product-image">
-                            <img src="/pages/mixer/static/pics/4_expand.jpg" alt="Мешалка для глазурей">
+                            <img src="/pages/mixer/pics/4_expand.jpg" alt="Мешалка для глазурей">
                         </div>
                         <h3>Мешалки</h3>
                         <p>Мешалки для глазурей</p>
@@ -255,7 +255,7 @@
 
                 <a href="/canns" class="product-card product-card-link">
                     <div class="product-image">
-                        <img src="/pages/canns/static/pics/1_1_expand.jpg" alt="Канны из карбида вольфрама">
+                        <img src="/pages/canns/pics/1_1_expand.jpg" alt="Канны из карбида вольфрама">
                     </div>
                     <h3>Канны</h3>
                     <p>Канны из карбида вольфрама для обточки изделий</p>
@@ -264,7 +264,7 @@
 
                 <a href="/cutter" class="product-card product-card-link">
                     <div class="product-image">
-                        <img src="/pages/cutter/static/pics/4_expand.jpg" alt="Струны для резки глины">
+                        <img src="/pages/cutter/pics/4_expand.jpg" alt="Струны для резки глины">
                     </div>
                     <h3>Струны</h3>
                     <p>Кевларовые струны для резки</p>
@@ -290,7 +290,7 @@
             <div class="content production-content">
                 <a href="/glaze_blend" class="product-card product-card-link">
                     <div class="product-image">
-                        <img src="/static/pics/glazeblend.jpeg" alt="Калькулятор растяжек глазурей">
+                        <img src="/pages/index/pics/glazeblend.jpeg" alt="Калькулятор растяжек глазурей">
                     </div>
                     <h3>Калькулятор растяжек</h3>
                     <p>Расчёт линейных, треугольных и квадратных растяжек любых размеров</p>
@@ -300,7 +300,7 @@
                 <!-- Glazy.org recipe exporter calculator -->
                 <a href="https://glazy-org-exporter.asakusa-lab.cc/" target="_blank" class="product-card product-card-link">
                     <div class="product-image">
-                        <img src="/static/pics/glazyorgexporter.jpeg" alt="Калькулятор смешивания рецептов с glazy.org">
+                        <img src="/pages/index/pics/glazyorgexporter.jpeg" alt="Калькулятор смешивания рецептов с glazy.org">
                     </div>
                     <h3>Калькулятор смешивания рецептов с glazy.org</h3>
                     <p>Вводите адрес и вес, получаете компоненты в килограммах. Работает даже с приватными рецептами. (если вы не поняли, зачем, оно вам не надо)</p>
@@ -310,7 +310,7 @@
                 <!-- Labeler: sticker printing service -->
                 <a href="https://labeler.asakusa-lab.cc/" target="_blank" class="product-card product-card-link">
                     <div class="product-image">
-                        <img src="/static/pics/labeler.jpeg" alt="Сервис печати наклеек">
+                        <img src="/pages/index/pics/labeler.jpeg" alt="Сервис печати наклеек">
                     </div>
                     <h3>Labeler</h3>
                     <p>Сервис для печати кучи наклеек из списка. Делаете шаблон, заполняете табличку и он выдает PDF который можно напечатать на термопринтере, сразу всю сотню наклеек</p>
@@ -342,5 +342,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="/static/js/main.js"></script>
+<script src="/pages/index/js/main.js"></script>
 {% endblock %}
