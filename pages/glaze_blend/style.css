@@ -1,0 +1,344 @@
+        .glaze-layout {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .glaze-sidebar {
+            width: 220px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-title {
+            color: var(--color-primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .stretch-type-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stretch-type {
+            width: 100%;
+            border: 1px solid var(--color-primary);
+            background: transparent;
+            color: var(--color-primary);
+            border-radius: 999px;
+            padding: 0.5rem 0.75rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .stretch-type:hover {
+            background: rgba(90, 154, 74, 0.15);
+        }
+
+        .stretch-type.active {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
+        }
+
+        .filter-item label {
+            display: block;
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-item input[type="number"] {
+            width: 100%;
+            padding: 0.5rem;
+            background: var(--color-bg-elevated);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            border-radius: 4px;
+            margin-top: 0.35rem;
+            margin-bottom: 1rem;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .filter-item input[type="number"]:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(90, 154, 74, 0.2);
+        }
+
+        .glaze-output {
+            flex: 1;
+            min-width: 0;
+            overflow-x: auto;
+        }
+
+        /* Center the inline-block triangle and square containers */
+        .calc_glaze {
+            text-align: center;
+        }
+
+        .calc {
+            font-family: Helvetica, Courier New, Consolas, SF Mono, DejaVu Sans Mono, Roboto Mono, monospace;
+        }
+
+        .calc-1,
+        .calc-2,
+        .calc-3 {
+            margin: 0 0 20px;
+        }
+
+        .calc-1 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .calc-2 {
+            display: grid;
+            gap: 10px;
+            grid-auto-rows: min-content;
+            width: max-content;
+            margin: 0 auto 20px;
+        }
+
+        .calc-3 {
+            display: inline-block;
+            text-align: center;
+            margin-left: -5px;
+        }
+
+        .calc-1-svg {
+            width: 100px;
+        }
+
+        .calc-2-svg {
+            width: 74px;
+        }
+
+        .calc-3-svg {
+            width: 88.06px;
+            margin: 5px;
+            vertical-align: top;
+        }
+
+        .calc-st {
+            stroke: #555555;
+        }
+
+        /* Darken bright tile background colors for dark theme */
+        .calc-bg1, .calc-bg2, .calc-bg3, .calc-bg4 {
+            filter: brightness(0.6);
+        }
+
+        /* Light text on colored SVG tile backgrounds */
+        .calc_glaze svg text {
+            fill: #bbbbbb;
+        }
+
+        /* Dark center circles instead of SVG default white */
+        .calc_glaze svg circle {
+            fill: #1e1e1e;
+        }
+
+        .calc-st__1 {
+            stroke-width: 1;
+        }
+
+        .calc-st__2 {
+            stroke-width: 2;
+        }
+
+        .calc-st__0 {
+            stroke-width: .5;
+        }
+
+        .calc-triangle {
+            stroke-linejoin: bevel;
+        }
+
+        .calc-bg1 {
+            fill: #fff200;
+            fill: #645faa;
+            opacity: .83;
+        }
+
+        .calc-bg2 {
+            fill: #ed1c24;
+            fill: #00a651;
+            opacity: .17;
+        }
+
+        .calc-bg3 {
+            fill: #fff200;
+            opacity: .83;
+        }
+
+        .calc-bg4 {
+            fill: #ed1c24;
+            opacity: .17;
+        }
+
+        .calc-txt1-1-1 {
+            font-size: 11px;
+            text-anchor: start;
+        }
+
+        .calc-txt1-1-2 {
+            font-size: 11px;
+            text-anchor: end;
+        }
+
+        .calc-txt1-2-1 {
+            text-anchor: middle;
+            alignment-baseline: middle;
+            font-size: 20px;
+        }
+
+        .calc-txt1-n {
+            text-anchor: middle;
+            alignment-baseline: middle;
+            font-size: 11px;
+        }
+
+        .calc-txt2-1-1,
+        .calc-txt2-2-1,
+        .calc-txt2-3-1,
+        .calc-txt2-4-1 {
+            font-size: 7.7px;
+        }
+
+        .calc-txt2-1-1,
+        .calc-txt2-4-1 {
+            text-anchor: start;
+        }
+
+        .calc-txt2-2-1,
+        .calc-txt2-3-1 {
+            text-anchor: end;
+        }
+
+        .calc-txt2-1-2,
+        .calc-txt2-2-2,
+        .calc-txt2-3-2,
+        .calc-txt2-4-2 {
+            font-size: 14px;
+            text-anchor: middle;
+            alignment-baseline: middle;
+        }
+
+        .calc-txt2-n {
+            font-size: 9px;
+            text-anchor: middle;
+            alignment-baseline: middle;
+        }
+
+        .calc-txt3-1-1,
+        .calc-txt3-2-1,
+        .calc-txt3-3-1 {
+            font-size: 7px;
+        }
+
+        .calc-txt3-1-1,
+        .calc-txt3-1-2 {
+            text-anchor: middle;
+        }
+
+        .calc-txt3-2-2 {
+            text-anchor: middle;
+            transform: translate(66px, 56px) rotate(-60deg) translate(-66px, -56px);
+        }
+
+        .calc-txt3-2-1 {
+            text-anchor: middle;
+            transform: translate(79px, 58px) rotate(-60deg) translate(-79px, -58px);
+        }
+
+        .calc-txt3-3-2 {
+            text-anchor: middle;
+            transform: translate(19px, 60px) rotate(60deg) translate(-19px, -60px);
+        }
+
+        .calc-txt3-3-1 {
+            text-anchor: middle;
+            transform: translate(13px, 60px) rotate(60deg) translate(-13px, -60px);
+        }
+
+        .calc-txt3-1-2,
+        .calc-txt3-2-2,
+        .calc-txt3-3-2 {
+            font-size: 12px;
+        }
+
+        .calc-txt3-n {
+            font-size: 10px;
+            text-anchor: middle;
+            alignment-baseline: middle;
+        }
+
+        .card {
+            background: transparent;
+        }
+
+        .card-body {
+            padding: 0;
+        }
+
+        .card-title {
+            color: var(--color-text);
+            font-weight: 300;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .fw-medium {
+            font-weight: 500;
+        }
+
+        .text-secondary {
+            color: #888;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        .pt-2 {
+            padding-top: 0.5rem;
+        }
+
+        .border-top {
+            border-top: 1px solid rgba(90,154,74,0.3);
+        }
+
+        .summary_container {
+            background: var(--color-bg-card);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-top: 1rem;
+            border: 1px solid rgba(90,154,74,0.15);
+            color: var(--color-text-secondary);
+        }
+
+        @media (max-width: 960px) {
+            .glaze-layout {
+                flex-direction: column;
+            }
+
+            .glaze-sidebar {
+                width: 100%;
+                max-width: 420px;
+            }
+        }

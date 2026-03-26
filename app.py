@@ -1,9 +1,16 @@
 import os
 
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, send_from_directory
+from jinja2 import ChoiceLoader, FileSystemLoader
 from loguru import logger
 
 app = Flask(__name__)
+
+# Allow templates to be found both in templates/ and pages/ directories.
+app.jinja_loader = ChoiceLoader([
+    FileSystemLoader(os.path.join(app.root_path, "templates")),
+    FileSystemLoader(os.path.join(app.root_path, "pages")),
+])
 
 
 @app.before_request
@@ -20,33 +27,40 @@ def index():
 
 @app.route("/asakusa")
 def asakusa():
-    return render_template("asakusa.html")
+    return render_template("asakusa/template.html")
 
 
 @app.route("/canns")
 def canns():
-    return render_template("canns.html")
+    return render_template("canns/template.html")
 
 
 @app.route("/cutter")
 def cutter():
-    return render_template("cutter.html")
+    return render_template("cutter/template.html")
 
 
 @app.route("/funnel")
 def funnel():
-    return render_template("funnel.html")
+    return render_template("funnel/template.html")
 
 
 @app.route("/glaze_blend")
 def glaze_blend():
     show_old_domain_notice = request.args.get("from") == "glazymixer"
-    return render_template("glaze_blend.html", show_old_domain_notice=show_old_domain_notice)
+    return render_template("glaze_blend/template.html", show_old_domain_notice=show_old_domain_notice)
 
 
 @app.route("/mixer")
 def mixer():
-    return render_template("mixer.html")
+    return render_template("mixer/template.html")
+
+
+@app.route("/pages/<page_name>/static/<path:filename>")
+def page_static(page_name, filename):
+    # Serve static files from each page's own directory.
+    page_dir = os.path.join(app.root_path, "pages", page_name)
+    return send_from_directory(page_dir, filename)
 
 
 if __name__ == "__main__":
