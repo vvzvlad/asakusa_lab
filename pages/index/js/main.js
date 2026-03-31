@@ -16,7 +16,7 @@ function initMap() {
                 hintContent: 'Asakusa Lab',
                 iconCaption: 'Asakusa Lab'
             }, {
-                preset: 'islands#redCircleDotIconWithCaption'
+                preset: 'islands#greenCircleDotIconWithCaption'
             });
 
             map.geoObjects.add(studioPlacemark);
