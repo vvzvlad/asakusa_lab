@@ -46,11 +46,13 @@
 .material-options {
     display: flex;
     gap: 1rem;
+    align-items: stretch;
 }
 
 .material-option {
     cursor: pointer;
     flex: 1;
+    display: flex;
 }
 
 .material-option input[type="radio"] {
@@ -69,7 +71,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 0.4rem;
+    width: 100%;
 }
 
 .material-note {
@@ -142,6 +146,13 @@
     justify-content: space-between;
     font-size: 0.8rem;
     color: var(--color-text-secondary);
+}
+
+/* Card divider */
+.card-divider {
+    border: none;
+    border-top: 1px solid rgba(90, 154, 74, 0.2);
+    margin: 1rem 0;
 }
 
 /* Result text */

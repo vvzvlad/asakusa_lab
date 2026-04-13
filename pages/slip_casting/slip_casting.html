@@ -38,7 +38,7 @@
                 <!-- Вес -->
                 <div class="calc-block">
                     <h2 class="block-title">Вес распускаемого материала (кг)</h2>
-                    <input type="number" id="weight" class="calc-input" placeholder="1" value="1" min="0" step="0.1">
+                    <input type="number" id="weight" class="calc-input" placeholder="1" value="1" min="0" step="1">
                 </div>
 
                 <!-- Плотность -->
@@ -68,13 +68,7 @@
             <!-- Правая колонка -->
             <div class="calc-col">
 
-                <!-- Базовые значения -->
-                <div class="calc-block info-block">
-                    <h2 class="block-title">Базовые значения = рекомендованное количество дефлокулянта (при плотности 1.75)</h2>
-                    <p class="block-subtitle">Под каждый материал и процесс необходимо подбирать свой рецепт, но от базы вы можете оттолкнуться и скорректировать количество дефлокулянтов под ваши цели.</p>
-                </div>
-
-                <!-- Жидкое стекло - слайдер -->
+                <!-- Жидкое стекло -->
                 <div class="calc-block">
                     <h2 class="block-title">Жидкое стекло, (%)</h2>
                     <p class="block-subtitle">Сильный дефлокулянт с узким диапазоном разжижения</p>
@@ -87,16 +81,10 @@
                             <span>0.5</span>
                         </div>
                     </div>
+                    <p class="result-text" id="result-glass" style="margin-top: 1rem;">Необходимое количество жидкого стекла: 0 г</p>
                 </div>
 
-                <!-- Результат: жидкое стекло -->
-                <div class="calc-block result-block">
-                    <h2 class="block-title">Необходимое количество жидкого стекла, (г)</h2>
-                    <p class="block-subtitle">Жидкое стекло вводится в шликер только распущенное в воде комнатной температуры. Добавлять строго указанное количество и только на вес!</p>
-                    <p class="result-text" id="result-glass">0 г</p>
-                </div>
-
-                <!-- Кальцинированная сода - слайдер -->
+                <!-- Кальцинированная сода -->
                 <div class="calc-block">
                     <h2 class="block-title">Кальцинированная сода, (%)</h2>
                     <p class="block-subtitle">Сильный дефлокулянт с широким диапазоном разжижения</p>
@@ -109,13 +97,7 @@
                             <span>0.5</span>
                         </div>
                     </div>
-                </div>
-
-                <!-- Результат: сода -->
-                <div class="calc-block result-block">
-                    <h2 class="block-title">Необходимое количество кальцинированной соды, (г)</h2>
-                    <p class="block-subtitle">Вводится в шликер предварительно распущенная в тёплой воде</p>
-                    <p class="result-text" id="result-soda">0 г</p>
+                    <p class="result-text" id="result-soda" style="margin-top: 1rem;">Необходимое количество кальцинированной соды: 0 г</p>
                 </div>
 
             </div>

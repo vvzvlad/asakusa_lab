@@ -56,9 +56,9 @@ function calculate() {
     // soda_ash = (1 - material) * weight * soda / 100
     const sodaAsh = (1 - material) * weight * soda / 100;
 
-    document.getElementById('result-water').textContent = formatWater(water);
-    document.getElementById('result-glass').textContent = formatGrams(liquidGlass);
-    document.getElementById('result-soda').textContent = formatGrams(sodaAsh);
+    document.getElementById('result-water').textContent = `Объём воды: ${formatWater(water)}`;
+    document.getElementById('result-glass').textContent = `Необходимое количество жидкого стекла: ${formatGrams(liquidGlass)}`;
+    document.getElementById('result-soda').textContent = `Необходимое количество кальцинированной соды: ${formatGrams(sodaAsh)}`;
 }
 
 function initSlider(sliderId, displayId, decimals) {
