@@ -1,0 +1,165 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Калькулятор рецепта шликера - Asakusa Lab{% endblock %}
+
+{% block head_extra %}
+<meta name="description" content="Калькулятор рабочего рецепта глиняного шликера: расчёт воды, жидкого стекла и кальцинированной соды.">
+<link rel="stylesheet" href="/pages/slip_casting/style.css">
+{% endblock %}
+
+{% block content %}
+<section class="screen" style="align-items: flex-start; padding-top: 40px; padding-bottom: 60px;">
+    <div class="container">
+        <a href="/" class="back-link">← Назад на главную</a>
+        <h1 style="color: var(--color-primary); font-size: 2rem; margin-bottom: 0.5rem;">Калькулятор рецепта шликера</h1>
+        <p class="page-subtitle">Форма расчёта рабочего рецепта глиняного шликера для литьевого формования</p>
+
+        <div class="calc-layout">
+
+            <!-- Левая колонка -->
+            <div class="calc-col">
+
+                <!-- Материал -->
+                <div class="calc-block">
+                    <h2 class="block-title">Выберите рабочий материал</h2>
+                    <p class="block-subtitle">
+                        *формула расчёта пластичной массы учитывает влажность материала около 20%.
+                        Если ваша глина потеряла пластичность — показания не будут верны.
+                    </p>
+                    <div class="material-options">
+                        <label class="material-option">
+                            <input type="radio" name="material" value="0" checked>
+                            <div class="material-card">
+                                <img src="https://static.tildacdn.com/tild6366-3132-4937-a264-616433363237/top-view-clay-powder.jpg"
+                                     alt="Сухая масса">
+                                <span>Сухая масса</span>
+                            </div>
+                        </label>
+                        <label class="material-option">
+                            <input type="radio" name="material" value="0.2">
+                            <div class="material-card">
+                                <img src="https://static.tildacdn.com/tild6433-3932-4361-b930-643435343534/close-up-hand-holdin.jpg"
+                                     alt="Пластичная масса">
+                                <span>Пластичная масса</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Вес -->
+                <div class="calc-block">
+                    <h2 class="block-title">Введите вес распускаемого материала, (г)</h2>
+                    <p class="block-subtitle">*вес необходимо указывать в граммах</p>
+                    <input type="number" id="weight" class="calc-input" placeholder="1000" value="1000" min="0">
+                </div>
+
+                <!-- Плотность -->
+                <div class="calc-block">
+                    <h2 class="block-title">Необходимая плотность шликера, (г/мл)</h2>
+                    <p class="block-subtitle">
+                        *для классического сливного метода оптимальный вариант 1.75.
+                        Для литья в заливные формы рекомендуется не опускать значение плотности ниже 1.80.
+                    </p>
+                    <select id="density" class="calc-select">
+                        <option value="0.6401">1.65</option>
+                        <option value="0.6460">1.66</option>
+                        <option value="0.6519">1.67</option>
+                        <option value="0.6577">1.68</option>
+                        <option value="0.6634">1.69</option>
+                        <option value="0.6691">1.70</option>
+                        <option value="0.6746">1.71</option>
+                        <option value="0.6802">1.72</option>
+                        <option value="0.6856">1.73</option>
+                        <option value="0.6910">1.74</option>
+                        <option value="0.6964" selected>1.75</option>
+                        <option value="0.7017">1.76</option>
+                        <option value="0.7068">1.77</option>
+                        <option value="0.7120">1.78</option>
+                        <option value="0.7171">1.79</option>
+                        <option value="0.7222">1.80</option>
+                        <option value="0.7271">1.81</option>
+                        <option value="0.7321">1.82</option>
+                        <option value="0.7369">1.83</option>
+                        <option value="0.7418">1.84</option>
+                        <option value="0.7465">1.85</option>
+                    </select>
+                </div>
+
+                <!-- Результат: вода -->
+                <div class="calc-block result-block">
+                    <h2 class="block-title">Необходимое количество воды, (г)</h2>
+                    <p class="block-subtitle">*вода — важная составляющая шликера. Чем мягче вода, тем лучше шликер.</p>
+                    <p class="result-text" id="result-water">Вам нужно 0 грамм воды</p>
+                </div>
+
+            </div>
+
+            <!-- Правая колонка -->
+            <div class="calc-col">
+
+                <!-- Базовые значения -->
+                <div class="calc-block info-block">
+                    <h2 class="block-title">Базовые значения = рекомендованное количество дефлокулянта (при плотности 1.75)*</h2>
+                    <p class="block-subtitle">
+                        *под каждый материал и процесс необходимо подбирать свой рецепт,
+                        но от базы вы можете оттолкнуться и скорректировать количество дефлокулянтов под ваши цели.
+                    </p>
+                </div>
+
+                <!-- Жидкое стекло - слайдер -->
+                <div class="calc-block">
+                    <h2 class="block-title">Жидкое стекло, (%)</h2>
+                    <p class="block-subtitle">*сильный дефлокулянт с узким диапазоном разжижения</p>
+                    <div class="slider-wrapper">
+                        <span class="slider-value" id="glass-display">0.16</span>
+                        <input type="range" id="glass" class="calc-slider"
+                               min="0.05" max="0.5" step="0.01" value="0.16">
+                        <div class="slider-labels">
+                            <span>0.05</span>
+                            <span>0.5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Результат: жидкое стекло -->
+                <div class="calc-block result-block">
+                    <h2 class="block-title">Необходимое количество жидкого стекла, (г)</h2>
+                    <p class="block-subtitle">
+                        *жидкое стекло вводится в шликер только распущенное в воде комнатной температуры.
+                        Добавлять строго указанное количество и только на вес!
+                    </p>
+                    <p class="result-text" id="result-glass">Вам нужно 0 граммов жидкого стекла</p>
+                </div>
+
+                <!-- Кальцинированная сода - слайдер -->
+                <div class="calc-block">
+                    <h2 class="block-title">Кальцинированная сода, (%)</h2>
+                    <p class="block-subtitle">*сильный дефлокулянт с широким диапазоном разжижения</p>
+                    <div class="slider-wrapper">
+                        <span class="slider-value" id="soda-display">0.06</span>
+                        <input type="range" id="soda" class="calc-slider"
+                               min="0.05" max="0.5" step="0.01" value="0.06">
+                        <div class="slider-labels">
+                            <span>0.05</span>
+                            <span>0.5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Результат: сода -->
+                <div class="calc-block result-block">
+                    <h2 class="block-title">Необходимое количество кальцинированной соды, (г)</h2>
+                    <p class="block-subtitle">*вводится в шликер предварительно распущенная в тёплой воде</p>
+                    <p class="result-text" id="result-soda">Вам нужно 0 граммов кальцинированной соды</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/pages/slip_casting/slip_casting_calculator.js"></script>
+{% endblock %}

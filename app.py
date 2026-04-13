@@ -53,6 +53,11 @@ def mixer():
     return render_template("mixer/mixer.html")
 
 
+@app.route("/slip_casting")
+def slip_casting():
+    return render_template("slip_casting/slip_casting.html")
+
+
 @app.route("/pages/<page_name>/<path:filename>")
 def page_static(page_name, filename):
     # Serve static files from each page's own directory.
