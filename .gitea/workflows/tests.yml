@@ -1,0 +1,125 @@
+name: Tests
+
+# PR gate. This workflow deliberately never logs in to the registry and never
+# pushes: it does not reference `secrets` at all. It proves that the image still
+# builds and that the app still starts, while :latest — the tag watchtower on
+# slug deploys to asakusa-lab.cc — stays untouched by PR branches.
+on:
+  # Manual re-run: without it a run that flaked on runner networking could only be
+  # retried by pushing an empty commit to the PR branch. Safe to expose here — this
+  # workflow touches no registry and no secrets, it only builds and smoke-tests.
+  workflow_dispatch:
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read   # checkout
+
+# Nothing here is published, so a superseded run has no value: when a PR gets a
+# new push, kill the in-flight check and run the fresh head instead. This is the
+# opposite of image-check-publish.yml, where cancelling would leave holes in the
+# :<sha> tag history.
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Compute the local image tag
+      id: tags
+      # A purely local tag: no registry host in front of it, so there is nothing
+      # here that `docker push` could even target. The run id keeps concurrent
+      # PR checks on the shared runner daemon from clobbering each other's tag.
+      env:
+        RUN_ID: ${{ github.run_id }}
+      run: |
+        echo "local=asakusa-lab-pr-check:$RUN_ID" >> "$GITHUB_OUTPUT"
+
+    - name: Build the Docker image
+      env:
+        # Through the environment rather than interpolated into the script text,
+        # same rule as everywhere else in this repo's workflows.
+        LOCAL_TAG: ${{ steps.tags.outputs.local }}
+      run: |
+        # --pull for the same reason as in image-check-publish.yml: cirunner-hatbox
+        # is self-hosted with a persistent docker daemon, so without it a stale
+        # base image could sit in the cache for months.
+        docker build --pull . --file Dockerfile --tag "$LOCAL_TAG"
+
+    - name: Smoke-test the built image
+      # There are no unit tests in this repo, so this is the whole PR gate. It runs
+      # the exact same ci/smoke.py against the exact same kind of container as
+      # image-check-publish.yml — only on the local tag, with no login and no push.
+      # Keeping the script in one file is the point: two copies of it would drift,
+      # and the PR gate would stop matching the gate that guards prod.
+      #
+      # The container starts with the image's OWN command — no `--entrypoint`,
+      # which would also drop the image's CMD and leave "does the container even
+      # start" untested (this image has no ENTRYPOINT, only CMD).
+      #
+      # Nothing is published to the host: the checks run from inside via
+      # `docker exec`, so parallel runs on this shared daemon cannot collide on a
+      # host port. The container name carries the run id for the same reason.
+      env:
+        SMOKE_TAG: ${{ steps.tags.outputs.local }}
+        NAME: asakusa-lab-pr-check-${{ github.run_id }}
+      run: |
+        docker run -d --name "$NAME" "$SMOKE_TAG"
+
+        # Poll instead of sleeping a guessed amount: a sleep long enough to be safe
+        # is wasted on every run, and a short one turns a slow start into a flake.
+        ready=""
+        for _ in $(seq 1 30); do
+          if docker exec "$NAME" python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/', timeout=2)" >/dev/null 2>&1; then
+            ready=1
+            break
+          fi
+          # A container that has already exited will never become ready — report it
+          # now rather than sitting out the whole timeout.
+          if [ "$(docker inspect -f '{{.State.Running}}' "$NAME")" != "true" ]; then
+            break
+          fi
+          sleep 1
+        done
+
+        if [ -z "$ready" ]; then
+          echo "container never answered on 127.0.0.1:5000 (it exited, or it stayed silent for 30s); container logs:"
+          # Without this there is nothing left to diagnose from: the cleanup step
+          # below removes the container.
+          docker logs "$NAME"
+          exit 1
+        fi
+
+        # Fed over stdin, so the image does not have to carry the test file and the
+        # very same script can be run by hand against a local container.
+        if ! docker exec -i "$NAME" python - < ci/smoke.py; then
+          echo "smoke failed; container logs:"
+          docker logs "$NAME"
+          exit 1
+        fi
+
+    - name: Remove the smoke container from the runner
+      # `always()`, and before the image cleanup below: cirunner-hatbox has one
+      # persistent docker daemon shared by every repository, so a container left
+      # behind by a failed run would sit there forever — and would also pin the
+      # image, making the `docker rmi` in the next step fail.
+      if: always()
+      env:
+        NAME: asakusa-lab-pr-check-${{ github.run_id }}
+      run: |
+        docker rm -f "$NAME" || true
+
+    - name: Remove the built image from the runner
+      # The runner's docker daemon is persistent and shared with other repos, so
+      # every PR check would otherwise leave an image behind forever. Removes ONLY
+      # the tag this run created — no `docker system prune`.
+      # `always()` so a failed smoke still cleans up after itself.
+      if: always()
+      env:
+        LOCAL_TAG: ${{ steps.tags.outputs.local }}
+      run: |
+        docker rmi "$LOCAL_TAG" || true

@@ -4,7 +4,6 @@
 
 {% block head_extra %}
 <meta name="description" content="Asakusa Lab - керамическая студия в Москве с профессиональным оборудованием для работы с керамикой и глазурями. Коворкинг и резидентство для керамистов, печи, круги, компоненты для глазурей, цифровое литье">
-<script src="https://api-maps.yandex.ru/2.1/?apikey=YOUR_API_KEY&lang=ru_RU" type="text/javascript"></script>
 {% endblock %}
 
 {% block content %}
@@ -367,7 +366,8 @@
                     <p>Если вы на такси или с яндекс-навигатором, можете просто забить в него "Asakusa Lab".</p>
                     <p>Если хотите чего спросить — пишите на <a href="mailto:mail@asakusa-lab.cc">mail@asakusa-lab.cc</a> или в тг <a href="https://t.me/vvzvlad" target="_blank">@vvzvlad</a>.</p>
                 </div>
-                <div id="yandex-map" style="width: 100%; height: 400px; margin-top: 2rem; border-radius: 8px;"></div>
+                <!-- 2GIS map constructor (makemap.2gis.ru) embed: free, no ads; data = zlib+base64 of the map JSON -->
+                <iframe title="Asakusa Lab на карте 2ГИС" src="https://makemap.2gis.ru/widget?data=eNpFkN1vgjAUxf-X7lHjqqwiJHtAdErSEWBmiosPjHZYA5SU-kn833fRffTlpufcc3Lza5BUjCvOZlwWXCvBa2R_NEifK45s9MITvVccdVGlZMWVvvkNSmUuFfgPxLGcJwd8LXTeJsKVv02M90v8Nn6Nl94zWIzXqRKVFrKEhWDudIK5j9PC2q8vZJwOXhSDkDc9bePd8ZAa0flzQMpgdxLpzgwL7R4x_Qprf-Zgegk1cy1MjUhYLvF89xHTVZT5bh_HQbi33A6msvYmuyhbeKO49OBPoy1r9TDD8TRru6DDxOt5eGAziukR9EV40G3vBLpmEWgjajgdOP7ilYyfkN3Hv-_aRdkd1rlF8UMqkKLUsJ9KACrKRN9AGmZvSLA1MruE9ExCrFF_A3nBkD0cXDddVCRVIGtxZ9OgvB3_IZQnGtl_UbhGygJuGUIHMJV5vtxynq9vqlZ7fv0GwbyRAg" sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation" style="display: block; width: 100%; height: 400px; margin-top: 2rem; border: 0; border-radius: 8px;"></iframe>
             </div>
         </div>
     </section>
