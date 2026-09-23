@@ -1,7 +1,7 @@
 name: Docker Image CI
 
 # No `pull_request` trigger here on purpose. This workflow pushes :latest, and
-# watchtower on slug polls the registry every two minutes — a build off any PR
+# Portainer auto-update on slug polls the registry every five minutes — a build off any PR
 # branch would ship straight to asakusa-lab.cc. PRs are covered by tests.yml,
 # which builds and smoke-tests but never logs in and never pushes.
 on:
@@ -18,7 +18,7 @@ permissions:
 
 # Two pushes to the same branch in a row must not race: the runs are independent
 # and the older one may finish last, leaving its :latest on the registry — a
-# watchtower deploy would then ship the previous commit to prod.
+# Portainer auto-update would then ship the previous commit to prod.
 # The group alone already fixes that: runs are serialised, so the newest commit's
 # :latest is written last. Cancelling is deliberately OFF — it would kill the
 # older run together with its :<sha> image, and on two quick pushes the
@@ -36,7 +36,7 @@ jobs:
 
     - name: Compute image tags
       id: tags
-      # main -> :latest + :<sha> (watchtower deploys :latest); ANY other branch -> :<branch>.
+      # main -> :latest + :<sha> (Portainer auto-update deploys :latest); ANY other branch -> :<branch>.
       # Only main is pushed to by the trigger above, but workflow_dispatch can be fired
       # off any ref, so the else branch still has to be correct.
       # Do NOT hardcode a fixed tag in the else branch: a build off a side branch would
@@ -60,7 +60,7 @@ jobs:
           # commit of the whole publication. If :<sha> fails to push (network,
           # registry quota, disk), the run stops before :latest moves and prod
           # keeps running the previous image. The reverse order would publish a
-          # :latest that watchtower deploys within 2 minutes while its immutable
+          # :latest that Portainer auto-update deploys within 5 minutes while its immutable
           # :<sha> twin — the only rollback point — never made it to the registry.
           echo "tags=$IMAGE:$SHA $IMAGE:latest" >> "$GITHUB_OUTPUT"
           # The smoke gate needs ONE unambiguous tag out of the list above. The
@@ -80,7 +80,7 @@ jobs:
           # The sanitiser passes a name through untouched when it already consists
           # of legal characters, so a branch literally named `latest` would come
           # out as the production tag and — one manual workflow_dispatch later —
-          # ship unreviewed code to every watchtower host. The `main` check above
+          # ship unreviewed code to every host that auto-updates off :latest. The `main` check above
           # does not cover this: the branch is not `main`, it only borrows its tag.
           # Reserved names are therefore prefixed instead of being used as-is.
           if [ "$branch_tag" = "latest" ]; then
@@ -110,7 +110,7 @@ jobs:
 
     - name: Smoke-test the built image
       # There are no unit tests in this repo, so this is the only gate before
-      # :latest goes live — watchtower on slug picks it up within two minutes.
+      # :latest goes live — Portainer auto-update on slug picks it up within five minutes.
       # It sits BETWEEN build and push on purpose: a red smoke means nothing
       # ever reaches the registry, so prod keeps serving the previous image.
       #

@@ -2,7 +2,7 @@ name: Tests
 
 # PR gate. This workflow deliberately never logs in to the registry and never
 # pushes: it does not reference `secrets` at all. It proves that the image still
-# builds and that the app still starts, while :latest — the tag watchtower on
+# builds and that the app still starts, while :latest — the tag Portainer auto-update on
 # slug deploys to asakusa-lab.cc — stays untouched by PR branches.
 on:
   # Manual re-run: without it a run that flaked on runner networking could only be
