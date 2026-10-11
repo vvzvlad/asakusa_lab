@@ -3,18 +3,10 @@
 It is fed to the container over stdin (`docker exec -i <name> python - < ci/smoke.py`),
 so it never has to be copied into the image, and it can be run by hand the same way.
 
-Two properties matter here and are easy to lose:
-
-* It talks HTTP to the server the image's own CMD started, instead of driving the
-  app in-process through Flask's test client. Only the former proves the container
-  actually comes up — a broken `__main__` block, a bad WORKDIR or a typo in CMD all
-  pass an in-process check while production serves nothing.
-* Failures leave through SystemExit, never `assert`. Asserts vanish under
-  PYTHONOPTIMIZE=1 (a common slim-image tweak), which would silently turn this gate
-  permanently green.
-
-Every route is checked before reporting, so one run shows the full extent of the
-breakage rather than only the first broken page.
+It talks HTTP to the server the image's own CMD started (not Flask's test client),
+so it proves the container actually comes up. Failures leave through SystemExit,
+never `assert`, which vanishes under PYTHONOPTIMIZE=1. Every route is checked
+before reporting.
 """
 
 import urllib.error

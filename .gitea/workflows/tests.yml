@@ -51,19 +51,15 @@ jobs:
         docker build --pull . --file Dockerfile --tag "$LOCAL_TAG"
 
     - name: Smoke-test the built image
-      # There are no unit tests in this repo, so this is the whole PR gate. It runs
-      # the exact same ci/smoke.py against the exact same kind of container as
-      # image-check-publish.yml — only on the local tag, with no login and no push.
-      # Keeping the script in one file is the point: two copies of it would drift,
-      # and the PR gate would stop matching the gate that guards prod.
+      # The whole PR gate: the same ci/smoke.py as image-check-publish.yml, on the
+      # local tag, with no login and no push.
       #
-      # The container starts with the image's OWN command — no `--entrypoint`,
-      # which would also drop the image's CMD and leave "does the container even
-      # start" untested (this image has no ENTRYPOINT, only CMD).
+      # The container runs the image's own CMD (no `--entrypoint`, which would drop
+      # CMD), so the check proves the container actually starts.
       #
-      # Nothing is published to the host: the checks run from inside via
-      # `docker exec`, so parallel runs on this shared daemon cannot collide on a
-      # host port. The container name carries the run id for the same reason.
+      # Nothing is published to the host: checks run via `docker exec`, so parallel
+      # runs on the shared daemon cannot collide on a port. The container name
+      # carries the run id for the same reason.
       env:
         SMOKE_TAG: ${{ steps.tags.outputs.local }}
         NAME: asakusa-lab-pr-check-${{ github.run_id }}
